@@ -66,7 +66,8 @@ namespace BookstoreEcommerce.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Error"] = "Sai đường dẫn!";
+                return Redirect("/404");
             }
 
             var sach = await _context.Saches
@@ -75,10 +76,25 @@ namespace BookstoreEcommerce.Controllers
                 .FirstOrDefaultAsync(m => m.MaSach == id);
             if (sach == null)
             {
-                return NotFound();
+                TempData["Error"] = $"Không tìm thấy sách có mã {id}!";
+                return Redirect("/404");
             }
 
-            return View(sach);
+            var result = new ChiTietSachViewModel
+            {
+                MaSach = sach.MaSach,
+                TenSach = sach.TenSach,
+                Hinh = sach.Hinh,
+                DonGia = sach.DonGia,
+                ChiTiet = sach.MoTa ?? string.Empty,
+                TenLoai = sach.MaLoaiNavigation.TenLoai,
+                MoTaDonVi = sach.MoTaDonVi,
+                // cập nhật sau
+                DiemDanhGia = 5, 
+                SoLuong = 10
+            };
+
+            return View(result);
         }
 
         // GET: Sach/Create
