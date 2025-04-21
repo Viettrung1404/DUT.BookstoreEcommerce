@@ -1,5 +1,7 @@
 using BookstoreEcommerce.Data;
+using BookstoreEcommerce.Helpers;
 using Microsoft.EntityFrameworkCore;
+
 namespace BookstoreEcommerce
 {
     public class Program
@@ -20,6 +22,8 @@ namespace BookstoreEcommerce
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
             var app = builder.Build();
 

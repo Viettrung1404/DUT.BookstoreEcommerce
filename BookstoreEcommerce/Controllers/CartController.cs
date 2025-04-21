@@ -8,8 +8,7 @@ namespace BookstoreEcommerce.Controllers
     public class CartController : Controller
     {
         private readonly BookEcommerceContext? db;
-        const string CART_KEY = "MYCART";
-        public List<CartViewModel> Cart => HttpContext.Session.Get<List<CartViewModel>>(CART_KEY) ?? new List<CartViewModel>();
+        public List<CartViewModel> Cart => HttpContext.Session.Get<List<CartViewModel>>(MySetting.CART_KEY) ?? new List<CartViewModel>();
 
         public CartController(BookEcommerceContext context)
         {
@@ -56,7 +55,7 @@ namespace BookstoreEcommerce.Controllers
                 item.SoLuong += quantity;
             }
 
-            HttpContext.Session.Set(CART_KEY, gioHang);
+            HttpContext.Session.Set(MySetting.CART_KEY, gioHang);
             return RedirectToAction("Index");
         }
 
@@ -73,7 +72,7 @@ namespace BookstoreEcommerce.Controllers
             if (item != null)
             {
                 gioHang.Remove(item);
-                HttpContext.Session.Set(CART_KEY, gioHang);
+                HttpContext.Session.Set(MySetting.CART_KEY, gioHang);
             }
 
             return RedirectToAction("Index");
