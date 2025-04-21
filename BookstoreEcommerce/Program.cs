@@ -12,6 +12,14 @@ namespace BookstoreEcommerce
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<BookEcommerceContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BookEcommerce")));
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 
@@ -27,6 +35,8 @@ namespace BookstoreEcommerce
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

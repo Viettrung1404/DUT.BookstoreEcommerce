@@ -8,9 +8,7 @@
         <div class="rounded position-relative fruite-item">
             <a asp-action="Details" class="img-fluid rounded-top" asp-controller="Sach" asp-route-id="@item.MaSach">
                 <div class="fruite-img">
-                
                         <img src="~/img/Sach/@item.Hinh" class="img-fluid rounded-top" alt="@item.TenSach">
-               
                 </div>
             </a>
             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">@item.TenLoai</div>
@@ -21,7 +19,7 @@
                 </a>
                 <div class="d-flex justify-content-between flex-lg-wrap">
                     <p class="text-dark fs-5 fw-bold mb-0">đ @item.DonGia</p>
-                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.MaSach" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                 </div>
             </div>
         </div>
