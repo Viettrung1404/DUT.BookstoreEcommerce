@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BookstoreEcommerce.Data;
+using BookstoreEcommerce.Models;
 using BookstoreEcommerce.ViewModels;
 
 namespace BookstoreEcommerce.Helpers

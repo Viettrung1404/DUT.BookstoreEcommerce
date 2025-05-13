@@ -14,19 +14,11 @@
 
     // Fixed Navbar
     $(window).scroll(function () {
-        if ($(window).width() < 992) {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow');
-            } else {
-                $('.fixed-top').removeClass('shadow');
-            }
+        if ($(this).scrollTop() > 10) {
+            $('.fixed-top').addClass('shadow').css(top, 0);
         } else {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow').css('top', -55);
-            } else {
-                $('.fixed-top').removeClass('shadow').css('top', 0);
-            }
-        } 
+            $('.fixed-top').removeClass('shadow').css(top, 0);
+        }
     });
     
     

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookstoreEcommerce.Data;
+namespace BookstoreEcommerce.Models;
 
 public partial class NhanVien
 {
@@ -13,11 +13,5 @@ public partial class NhanVien
 
     public string? MatKhau { get; set; }
 
-    public virtual ICollection<ChuDe> ChuDes { get; set; } = new List<ChuDe>();
-
     public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
-
-    public virtual ICollection<HoiDap> HoiDaps { get; set; } = new List<HoiDap>();
-
-    public virtual ICollection<PhanCong> PhanCongs { get; set; } = new List<PhanCong>();
 }

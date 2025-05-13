@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookstoreEcommerce.Data;
+namespace BookstoreEcommerce.Models;
 
 public partial class NhaCungCap
 {

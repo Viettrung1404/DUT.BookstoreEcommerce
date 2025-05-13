@@ -1,5 +1,8 @@
-using BookstoreEcommerce.Data;
+﻿using BookstoreEcommerce.Data;
 using BookstoreEcommerce.Helpers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookstoreEcommerce
@@ -25,6 +28,22 @@ namespace BookstoreEcommerce
 
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/KhachHang/DangNhap";
+                    options.AccessDeniedPath = "/AccessDenied";
+                });
+
+            // Dang ký dịch vụ PaypalClient dang singleton
+            builder.Services.AddSingleton(x => new PaypalClient(
+                builder.Configuration["PaypalOptions:AppId"],
+                builder.Configuration["PaypalOptions:AppSecret"],
+                builder.Configuration["PaypalOptions:Mode"]
+            ));
+
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -41,6 +60,8 @@ namespace BookstoreEcommerce
             app.UseRouting();
 
             app.UseSession();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

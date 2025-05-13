@@ -9,6 +9,7 @@ namespace BookstoreEcommerce.Helpers
             try
             {
                 var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", folder, Hinh.FileName);
+                Console.WriteLine(fullPath);
                 using (var myfile = new FileStream(fullPath, FileMode.CreateNew))
                 {
                     Hinh.CopyTo(myfile);

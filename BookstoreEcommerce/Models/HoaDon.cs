@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookstoreEcommerce.Data;
+namespace BookstoreEcommerce.Models;
 
 public partial class HoaDon
 {
@@ -17,13 +17,15 @@ public partial class HoaDon
 
     public string? HoTen { get; set; }
 
+    public string? DienThoai { get; set; }
+
     public string DiaChi { get; set; } = null!;
 
     public string CachThanhToan { get; set; } = null!;
 
     public string CachVanChuyen { get; set; } = null!;
 
-    public double PhiVanChuyen { get; set; }
+    public double? PhiVanChuyen { get; set; }
 
     public int MaTrangThai { get; set; }
 

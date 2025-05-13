@@ -1,0 +1,135 @@
+﻿@model IEnumerable<BookstoreEcommerce.ViewModels.LichSuHoaDonViewModel>
+@{
+    ViewBag.Title = "Lịch sử mua hàng";
+}
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Lịch sử đơn hàng</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Cart">Giỏ hàng</a></li>
+        <li class="breadcrumb-item active text-white">Lịch sử đơn hàng</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        @if (!Model.Any())
+        {
+            <div class="text-center">
+                <i class="bi bi-clock-history display-1 text-secondary"></i>
+                <h2 class="my-4">Bạn chưa có đơn hàng nào</h2>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-primary btn-lg">Mua sắm ngay</a>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var hd in Model)
+                {
+                    <div class="col-12">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-light">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <h5 class="mb-0">Mã HĐ: #@hd.MaHd</h5>
+                                        <small class="text-muted">@hd.NgayDat.ToString("dd/MM/yyyy HH:mm")</small>
+                                    </div>
+                                    <div class="col-md-8 text-md-end">
+                                        <span class="badge bg-primary">@hd.CachThanhToan</span>
+                                        <span class="badge bg-info ms-2">@hd.CachVanChuyen</span>
+                                        @{
+                                            var statusClass = hd.TenTrangThai switch
+                                            {
+                                                "Mới đặt hàng" => "bg-warning",
+                                                "Đã xác nhận" => "bg-success",
+                                                "Đã hủy" => "bg-danger",
+                                                _ => "bg-secondary"
+                                            };
+                                        }
+                                        <span class="badge @statusClass ms-2">@hd.TenTrangThai</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Chi tiết sản phẩm -->
+                                    <div class="col-lg-8">
+                                        <h6 class="mb-3">Sản phẩm</h6>
+                                        @foreach (var ct in hd.ChiTietHds)
+                                        {
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="flex-shrink-0">
+                                                    <img src="~/img/Sach/@ct.Hinh" alt="@ct.TenSach"
+                                                         class="img-fluid rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="mb-1">@ct.TenSach</h6>
+                                                    <p class="mb-0 text-muted">Số lượng: @ct.SoLuong</p>
+                                                    <p class="mb-0 text-muted">Đơn giá: @ct.DonGia.ToString("N0")đ</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <!-- Thông tin tổng hợp -->
+                                    <div class="col-lg-4">
+                                        <div class="border-start ps-4">
+                                            <h6 class="mb-3">Thông tin đơn hàng</h6>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Tổng tiền:</span>
+                                                <strong>@hd.ChiTietHds.Sum(ct => ct.SoLuong * ct.DonGia).ToString("N0")đ</strong>
+                                            </div>
+                                            @if (hd.TenTrangThai == "Mới đặt hàng")
+                                            {
+                                                <form asp-action="HuyDon" asp-controller="Cart" method="post">
+                                                    <input type="hidden" name="id" value="@hd.MaHd" />
+                                                    <button type="submit" class="btn btn-outline-danger w-100 mt-2">
+                                                        <i class="bi bi-x-circle me-2"></i>Hủy đơn
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .badge {
+        font-size: 0.9em;
+        padding: 0.6em 1em;
+    }
+
+    .border-start {
+        border-left: 2px solid #dee2e6 !important;
+    }
+
+    @@media (max-width: 768px) {
+        .border-start {
+            border-left: none !important;
+            padding-left: 0 !important;
+        }
+
+        .card-header h5 {
+            font-size: 1.1rem;
+        }
+
+        .badge {
+            margin-top: 0.5rem;
+        }
+    }
+</style>

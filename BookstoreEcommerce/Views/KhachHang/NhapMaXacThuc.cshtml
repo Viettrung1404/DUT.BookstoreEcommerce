@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Nhập mã xác thực";
+}
+
+<div class="d-flex justify-content-center align-content-center flex-column h-100 flex-wrap" style="min-height: 100vh">
+    <h4>Nhập mã xác thực đã gửi về email</h4>
+    <form asp-action="XacThucDoiMatKhau" method="post" class="d-flex justify-content-center align-content-center g-3 gap-3 h-100" style="max-width: 60vw">
+        <input type="text" name="MaXacThuc" class="form-control" required placeholder="Mã xác thực" />
+        <button type="submit" class="btn btn-primary mt-2">Xác thực</button>
+    </form>
+    @if (TempData["Loi"] != null)
+    {
+        <div class="text-danger">@TempData["Loi"]</div>
+    }
+</div>

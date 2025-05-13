@@ -7,6 +7,8 @@
 	<div class="container py-5">
 		<h1 class="mb-4">Đăng ký Thành viên</h1>
 		<form asp-action="DangKy" enctype="multipart/form-data">
+			<!-- Hiển thị tất cả lỗi tổng hợp -->
+			<div asp-validation-summary="All" class="text-danger"></div>
 			<div class="row">
 				<div class="row">
 					<div class="col-md-12 col-lg-6">
@@ -57,7 +59,7 @@
 					</div>
 
 					<div class="form-item">
-						<label class="form-label my-3" for="Hinh">Hình<sup>*</sup></label>
+						<label class="form-label my-3" for="Hinh">Hình</label>
 						<input type="file" name="Hinh" class="form-control" />
 					</div>
 				</div>

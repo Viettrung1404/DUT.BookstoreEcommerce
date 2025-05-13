@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookstoreEcommerce.Data;
+namespace BookstoreEcommerce.Models;
 
-public partial class VChiTietHoaDon
+public partial class ChiTietHd
 {
     public int MaCt { get; set; }
 
@@ -17,5 +17,7 @@ public partial class VChiTietHoaDon
 
     public double GiamGia { get; set; }
 
-    public string TenSach { get; set; } = null!;
+    public virtual HoaDon MaHdNavigation { get; set; } = null!;
+
+    public virtual Sach MaSachNavigation { get; set; } = null!;
 }

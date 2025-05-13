@@ -76,6 +76,7 @@
 
 /*** Topbar Start ***/
 .fixed-top {
+    top: 0 !important;
     transition: 0.5s;
     background: var(--bs-white);
     border: 0;
@@ -178,7 +179,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(../img/hero-img.jpg);
+    background: linear-gradient(rgba(248, 223, 173, 0.3), rgba(248, 223, 173, 0.3)), url(../img/hero.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -219,7 +220,7 @@
 
 .page-header {
     position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/cart-page-header-img.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/library.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -228,7 +229,7 @@
 @media (min-width: 992px) {
     .hero-header,
     .page-header {
-        margin-top: 152px !important;
+        margin-top: 100px !important;
     }
 }
 

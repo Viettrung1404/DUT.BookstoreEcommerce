@@ -32,7 +32,7 @@
 
 </head>
 <body>
-    <div>
+    <div style="min-height: 100vh">
 
         <!-- Spinner Start -->
         <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
@@ -61,6 +61,16 @@
 
     <!-- Template Javascript -->
     <script src="~/js/main.js"></script>
+    <script>
+        // Fixed Navbar
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 10) {
+                $('.fixed-top').addClass('shadow').css(top, 0);
+            } else {
+                $('.fixed-top').removeClass('shadow').css(top, 0);
+            }
+        });
+    </script>
 
     @RenderSection("Scripts", required: false)
 

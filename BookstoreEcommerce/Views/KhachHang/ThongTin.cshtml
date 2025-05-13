@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "ThongTin";
+}
+
+<div class="container py-5" style="margin-top: 80px">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Thông tin cá nhân</h3>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Họ tên:</dt>
+                        <dd class="col-sm-8">@User.FindFirst(System.Security.Claims.ClaimTypes.Surname)?.Value</dd>
+                        <dt class="col-sm-4">Email:</dt>
+                        <dd class="col-sm-8">@User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value</dd>
+                        <dt class="col-sm-4">Số điện thoại:</dt>
+                        <dd class="col-sm-8">@User.FindFirst("DienThoai")?.Value</dd>
+                        <dt class="col-sm-4">Địa chỉ:</dt>
+                        <dd class="col-sm-8">@User.FindFirst("DiaCHi")?.Value</dd>
+                    </dl>
+                    <a asp-action="DangXuat" class="btn btn-outline-danger">Đăng xuất</a>
+                </div>
+            </div>
+
+            <div class="card shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">Đổi mật khẩu</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="DoiMatKhau" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="mb-3">
+                            <label for="CurrentPassword" class="form-label">Mật khẩu hiện tại</label>
+                            <input type="password" class="form-control" id="CurrentPassword" name="CurrentPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="NewPassword" class="form-label">Mật khẩu mới</label>
+                            <input type="password" class="form-control" id="NewPassword" name="NewPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ConfirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                            <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+                    </form>
+                    <small class="text-muted d-block mt-2">
+                        * Khi đổi mật khẩu, hệ thống sẽ gửi mã xác thực về email của bạn để xác nhận.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

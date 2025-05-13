@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookstoreEcommerce.Data;
+namespace BookstoreEcommerce.Models;
 
 public partial class KhachHang
 {
@@ -28,8 +28,6 @@ public partial class KhachHang
     public int VaiTro { get; set; }
 
     public string? RandomKey { get; set; }
-
-    public virtual ICollection<BanBe> BanBes { get; set; } = new List<BanBe>();
 
     public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
 

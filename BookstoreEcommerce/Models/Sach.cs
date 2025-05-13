@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookstoreEcommerce.Data;
+namespace BookstoreEcommerce.Models;
 
 public partial class Sach
 {
@@ -30,8 +30,6 @@ public partial class Sach
     public string? MoTa { get; set; }
 
     public string MaNcc { get; set; } = null!;
-
-    public virtual ICollection<BanBe> BanBes { get; set; } = new List<BanBe>();
 
     public virtual ICollection<ChiTietHd> ChiTietHds { get; set; } = new List<ChiTietHd>();
 

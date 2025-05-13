@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Giao dịch thành công";
+}
+
+<div class="container py-5 text-center mh-100">
+    <h1 class="text-success mb-4"><i class="fa fa-check-circle"></i> Đặt hàng thành công!</h1>
+    <p class="lead mb-5">Cảm ơn bạn đã mua hàng tại BookBridge. Đơn hàng của bạn đã được ghi nhận.</p>
+    <div class="d-flex justify-content-center gap-3">
+        <a class="btn btn-primary px-4 py-2" asp-action="LichSu" asp-controller="Cart">
+            Xem lịch sử mua hàng
+        </a>
+        <a class="btn btn-outline-secondary px-4 py-2" asp-action="Index" asp-controller="Sach">
+            Tiếp tục mua sách
+        </a>
+    </div>
+</div>

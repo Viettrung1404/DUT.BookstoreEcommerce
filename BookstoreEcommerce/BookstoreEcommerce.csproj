@@ -22,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Data\" />
+    <Folder Include="wwwroot\img\KhachHang\" />
   </ItemGroup>
 
 </Project>

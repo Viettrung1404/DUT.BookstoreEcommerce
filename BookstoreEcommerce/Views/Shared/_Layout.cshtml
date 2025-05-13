@@ -44,6 +44,17 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/main.js"></script>
+    <script>
+        // Fixed Navbar
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 10) {
+                $('.fixed-top').addClass('shadow').css(top, 0);
+            } else {
+                $('.fixed-top').removeClass('shadow').css(top, 0);
+            }
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
