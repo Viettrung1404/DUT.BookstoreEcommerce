@@ -54,7 +54,6 @@ namespace BookstoreEcommerce.Controllers
                     }
                     else
                     {
-                        // Không làm gì, để `khachHang.Hinh` giữ giá trị mặc định (null)
                     }
                     db.KhachHangs.Add(khachHang);
                     db.SaveChanges();
@@ -107,7 +106,7 @@ namespace BookstoreEcommerce.Controllers
                             new Claim(ClaimTypes.Name, khachHang.MaKh),
                             new Claim(ClaimTypes.Email, khachHang.Email),
                             new Claim(MySetting.CLAIM_CUSTOMERID, khachHang.MaKh),
-                            new Claim(ClaimTypes.Role, "Customer"),
+                            new Claim(ClaimTypes.Role, khachHang.VaiTro == 0? "Customer" : "Admin"),
                             new Claim(ClaimTypes.Surname, khachHang.HoTen),
                             new Claim("Hinh", khachHang.Hinh ?? "default.png"),
                             new Claim("GioiTinh", khachHang.GioiTinh == true ? "Nam" : "Nữ"),
@@ -121,6 +120,10 @@ namespace BookstoreEcommerce.Controllers
 
                         if (Url.IsLocalUrl(ReturnUrl))
                             return Redirect(ReturnUrl);
+                        if (khachHang.VaiTro == 1)
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
                         return RedirectToAction("Index", "Home");
                     }
                 }

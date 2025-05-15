@@ -2,12 +2,15 @@
 <div class="container-fluid fixed-top">
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a asp-action="Index" asp-controller="Home" class="navbar-brand"><h1 class="text-primary display-6">BookBridge</h1></a>
+            <a asp-action="Index" asp-controller="Home" class="navbar-brand d-flex align-items-center">
+                <img src="~/img/book.png" alt="logo" width="32" height="32" class="me-2" />
+                <span class="text-primary fw-bold fs-2">BookBridge</span>
+            </a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                <div class="navbar-nav mx-auto">
+                <div class="navbar-nav mx-auto">    
                     <a asp-action="Index" asp-controller="Home" class="nav-item nav-link active">Trang chủ</a>
                     <a asp-action="Index" asp-controller="Sach" class="nav-item nav-link">Sách</a>
 
@@ -15,6 +18,13 @@
                     {
                         <!-- Hiển thị khi đã đăng nhập -->
                         <a asp-action="LichSu" asp-controller="Cart" class="nav-item nav-link">Lịch sử mua hàng</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="nav-item nav-link">Chuyển sang giao diện Admin</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <form asp-controller="KhachHang" asp-action="DangXuat" method="post">
                                 <button type="submit" class="nav-link btn btn-link">Đăng xuất</button>

@@ -1,0 +1,144 @@
+﻿@model BookstoreEcommerce.Areas.Admin.ViewModels.KhachHangViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4">Thêm mới khách hàng</h2>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Nhập thông tin khách hàng</h6>
+            <a href="@Url.Action("Index")" class="btn btn-secondary btn-sm">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="col-md-5 mb-4">
+                        <div class="card border-left-primary h-100">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <div class="image-preview mb-3">
+                                        <img id="preview" src="@Url.Content("~/Content/Images/no-avatar.png")" alt="Hình đại diện" class="img-profile rounded-circle border" style="width: 200px; height: 200px; object-fit: cover;">
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="Hinh" name="HinhUpload" onchange="previewImage(event)">
+                                        <label class="custom-file-label" for="Hinh">Chọn hình đại diện</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="MaKh">Mã khách hàng <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.MaKh, new { @class = "form-control", placeholder = "Nhập mã khách hàng" })
+                                    @Html.ValidationMessageFor(m => m.MaKh, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="MatKhau">Mật khẩu <span class="text-danger">*</span></label>
+                                    @Html.PasswordFor(m => m.MatKhau, new { @class = "form-control", placeholder = "Nhập mật khẩu" })
+                                    @Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="VaiTro">Vai trò <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="VaiTro" name="VaiTro">
+                                        <option value="0">Khách hàng</option>
+                                        <option value="1">Quản trị viên</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        @Html.CheckBoxFor(m => m.HieuLuc, new { @class = "custom-control-input", id = "HieuLuc" })
+                                        <label class="custom-control-label" for="HieuLuc">Hiệu lực tài khoản</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 mb-4">
+                        <div class="card border-left-success h-100">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="HoTen">Họ và tên <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control", placeholder = "Nhập họ và tên" })
+                                    @Html.ValidationMessageFor(m => m.HoTen, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Email">Email <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Nhập email", type = "email" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="DienThoai">Điện thoại</label>
+                                    @Html.TextBoxFor(m => m.DienThoai, new { @class = "form-control", placeholder = "Nhập số điện thoại" })
+                                    @Html.ValidationMessageFor(m => m.DienThoai, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Giới tính <span class="text-danger">*</span></label>
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.GioiTinh, true, new { @class = "form-check-input", id = "gioiTinhNam" })
+                                        <label class="form-check-label" for="gioiTinhNam">Nam</label>
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.GioiTinh, false, new { @class = "form-check-input", id = "gioiTinhNu" })
+                                        <label class="form-check-label" for="gioiTinhNu">Nữ</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="NgaySinh">Ngày sinh <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.NgaySinh, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                                    @Html.ValidationMessageFor(m => m.NgaySinh, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="DiaChi">Địa chỉ</label>
+                                    @Html.TextAreaFor(m => m.DiaChi, new { @class = "form-control", rows = "3", placeholder = "Nhập địa chỉ" })
+                                    @Html.ValidationMessageFor(m => m.DiaChi, "", new { @class = "text-danger" })
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block mt-4">
+                                    <i class="fas fa-save"></i> Lưu thông tin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('preview');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+
+            // Hiển thị tên file
+            var fileName = event.target.files[0].name;
+            $(event.target).next('.custom-file-label').html(fileName);
+        }
+
+        $(document).ready(function () {
+            // Khởi tạo Bootstrap Custom File Input
+            bsCustomFileInput.init();
+        });
+    </script>
+}
+

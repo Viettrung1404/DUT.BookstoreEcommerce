@@ -1,0 +1,88 @@
+﻿@model BookstoreEcommerce.Areas.Admin.ViewModels.KhachHangViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4">Chi tiết người dùng</h2>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Thông tin người dùng</h6>
+            <div>
+                <a href="@Url.Action("Edit", new { id = Model.MaKh })" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Chỉnh sửa
+                </a>
+                <a href="@Url.Action("Index")" class="btn btn-secondary btn-sm ml-2">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="profile-image-container">
+                        @if (!string.IsNullOrEmpty(Model.Hinh))
+                        {
+                            <img src="@Url.Content("~/img/KhachHang/" + Model.Hinh)" alt="@Model.HoTen" class="img-profile rounded-circle img-fluid border p-1" style="width: 200px; height: 200px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/Images/no-avatar.png")" alt="No Image" class="img-profile rounded-circle img-fluid border p-1" style="width: 200px; height: 200px; object-fit: cover;">
+                        }
+                    </div>
+                    <div class="mt-3">
+                        <h5 class="font-weight-bold">@Model.HoTen</h5>
+                        <span class="badge @(Model.HieuLuc ? "badge-success" : "badge-danger") p-2">
+                            @(Model.HieuLuc ? "Đang hoạt động" : "Đã khóa")
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th style="width: 30%;">Mã khách hàng</th>
+                                <td>@Model.MaKh</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>@Model.Email</td>
+                            </tr>
+                            <tr>
+                                <th>Điện thoại</th>
+                                <td>@(string.IsNullOrEmpty(Model.DienThoai) ? "Chưa cập nhật" : Model.DienThoai)</td>
+                            </tr>
+                            <tr>
+                                <th>Giới tính</th>
+                                <td>@(Model.GioiTinh ? "Nam" : "Nữ")</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày sinh</th>
+                                <td>@Model.NgaySinh.ToString("dd/MM/yyyy")</td>
+                            </tr>
+                            <tr>
+                                <th>Địa chỉ</th>
+                                <td>@(string.IsNullOrEmpty(Model.DiaChi) ? "Chưa cập nhật" : Model.DiaChi)</td>
+                            </tr>
+                            <tr>
+                                <th>Vai trò</th>
+                                <td>
+                                    @if (Model.VaiTro == 1)
+                                    {
+                                        <span class="text-danger font-weight-bold">Quản trị viên</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Khách hàng</span>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
