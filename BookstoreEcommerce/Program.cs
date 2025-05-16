@@ -31,6 +31,9 @@ namespace BookstoreEcommerce
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
+                    options.Cookie.Name = "MyAuthCookie";
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                     options.LoginPath = "/KhachHang/DangNhap";
                     options.AccessDeniedPath = "/AccessDenied";
                 });

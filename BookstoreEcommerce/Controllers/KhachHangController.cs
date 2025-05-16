@@ -141,7 +141,6 @@ namespace BookstoreEcommerce.Controllers
         [Authorize]
         public IActionResult ThongTin()
         {
-
             return View();
         }
 
