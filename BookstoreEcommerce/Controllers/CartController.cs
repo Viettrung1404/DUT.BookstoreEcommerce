@@ -211,14 +211,23 @@ namespace BookstoreEcommerce.Controllers
                 var model = HttpContext.Session.Get<CheckoutViewModel>("CHECKOUT_INFO");
 
                 var customerId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == MySetting.CLAIM_CUSTOMERID)?.Value;
-                var khachHang = db?.KhachHangs?.FirstOrDefault(x => x.MaKh == customerId);
+                if (customerId == null)
+                {
+                    TempData["Error"] = "Không tìm thấy thông tin khách hàng!";
+                    return RedirectToAction("Index");
+                }
+                var khachHang = new KhachHang();
+                if (model.GiongKhachHang)
+                {
+                    khachHang = db?.KhachHangs?.FirstOrDefault(x => x.MaKh == customerId);
+                }
 
                 var hoaDon = new HoaDon
                 {
                     MaKh = customerId,
-                    HoTen = model?.HoTen ?? khachHang?.HoTen,
-                    DiaChi = model?.DiaChi ?? khachHang?.DiaChi,
-                    DienThoai = model?.DienThoai ?? khachHang?.DienThoai,
+                    HoTen = ChonGiaTri(model?.HoTen, khachHang?.HoTen),
+                    DiaChi = ChonGiaTri(model?.DiaChi, khachHang?.DiaChi),
+                    DienThoai = ChonGiaTri(model?.DienThoai, khachHang?.DienThoai),
                     GhiChu = model?.GhiChu,
                     NgayDat = DateTime.Now,
                     CachThanhToan = "PayPal",
@@ -325,6 +334,11 @@ namespace BookstoreEcommerce.Controllers
 
             TempData["Success"] = "Đã hủy đơn hàng thành công!";
             return RedirectToAction("LichSu");
+        }
+
+        string ChonGiaTri(string uuTien, string duPhong)
+        {
+            return !string.IsNullOrWhiteSpace(uuTien) ? uuTien : duPhong;
         }
     }
 }

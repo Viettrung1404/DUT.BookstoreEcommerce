@@ -31,6 +31,8 @@ public partial class Sach
 
     public string MaNcc { get; set; } = null!;
 
+    public string? Status { get; set; }
+
     public virtual ICollection<ChiTietHd> ChiTietHds { get; set; } = new List<ChiTietHd>();
 
     public virtual Loai MaLoaiNavigation { get; set; } = null!;

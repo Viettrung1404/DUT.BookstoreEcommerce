@@ -153,7 +153,7 @@ namespace BookstoreEcommerce.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MaKh,MatKhau,HoTen,GioiTinh,NgaySinh,DiaChi,DienThoai,Email,Hinh,HieuLuc,VaiTro,RandomKey")] KhachHang khachHang)
+        public async Task<IActionResult> Edit(string id, KhachHangViewModel khachHang)
         {
             if (id != khachHang.MaKh)
             {
